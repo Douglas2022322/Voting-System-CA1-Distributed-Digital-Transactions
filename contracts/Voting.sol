@@ -36,4 +36,25 @@ contract Voting {
 
     // Voting status
     bool public votingActive;
+
+        // Events for logging key actions
+    event NewVote(address indexed voter, uint indexed candidateNumber); // Emitted when a new vote is cast
+    event VotingStarted();                                              // Emitted when voting starts
+    event VotingEnded();                                                // Emitted when voting ends
+    event VoterRegistered(address voter);                               // Emitted when a voter is registered
+
+    // Constructor to initialize the contract with candidates and set admin
+    constructor(string[] memory candidateNames, uint[] memory candidateNumbers) {
+        require(candidateNames.length == candidateNumbers.length, "Candidates' names and numbers length must match");
+
+        admin = msg.sender;  // Sets the contract creator as the admin
+        votingActive = false; // Voting starts as inactive
+
+        // Loop to add each candidate to the list
+        for (uint i = 0; i < candidateNames.length; i++) {
+            candidates.push(Candidate(candidateNames[i], candidateNumbers[i], 0));
+            candidateIndexByNumber[candidateNumbers[i]] = i; // Map candidate number to index in array
+            candidateExists[candidateNumbers[i]] = true;     // Mark candidate number as existing
+        }
+    }
 }
