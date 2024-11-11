@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-
+// Example candidate list: ["Alice", "Bob", "Charlie"][12, 28, 22]
 
 pragma solidity ^0.8.7;
 
