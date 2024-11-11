@@ -18,4 +18,22 @@ contract Voting {
         bool isRegistered;  // Whether the voter is registered
         bool hasVoted;      // Whether the voter has already voted
     }
+
+        // List of candidates
+    Candidate[] private candidates;
+    
+    // Mapping to store voter information by address
+    mapping(address => Voter) public voters;
+
+    // Mapping to find a candidate's index by their number
+    mapping(uint => uint) private candidateIndexByNumber;
+
+    // Mapping to check if a candidate number exists
+    mapping(uint => bool) private candidateExists;
+    
+    // Administrator's address (contract creator)
+    address public admin;
+
+    // Voting status
+    bool public votingActive;
 }
